@@ -12,36 +12,47 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener for form submission
     registrationForm.addEventListener('submit', (e) => {
         e.preventDefault();//prevent form from loading when form is been submited
+        register().then((result) => {
+            // Add user to the list
+            users.push(result);
+            // Render user in the table
+            renderUser(result);
+            // Reset form fields
+            registrationForm.reset();
+        }).catch((error) => {
 
-        //Misheal and Gbolahan did
+        })
+        // e.preventDefault();//prevent form from loading when form is been submited
 
-        // Get form values
-        const firstName = document.getElementById('first_name').value;
-        const lastName = document.getElementById('last_name').value;
-        const phoneNumber = document.getElementById('phone_number').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        // //Misheal and Gbolahan did
+
+        // // Get form values
+        // const firstName = document.getElementById('first_name').value;
+        // const lastName = document.getElementById('last_name').value;
+        // const phoneNumber = document.getElementById('phone_number').value;
+        // const email = document.getElementById('email').value;
+        // const password = document.getElementById('password').value;
   
-        // Create a new user object
-        const newUser = {
-            id: users.length + 1,//users id should start from 1, that is why 1 was added.
-            firstName: firstName,
-            lastName: lastName,
-            phoneNumber: phoneNumber,
-            email: email,
-            password: password
-        };
-        //Ends here
+        // // Create a new user object
+        // const newUser = {
+        //     id: users.length + 1,//users id should start from 1, that is why 1 was added.
+        //     firstName: firstName,
+        //     lastName: lastName,
+        //     phoneNumber: phoneNumber,
+        //     email: email,
+        //     password: password
+        // };
+        // //Ends here
 
 
-        // Add user to the list
-        users.push(newUser);
+        // // Add user to the list
+        // users.push(newUser);
   
-        // Render user in the table
-        renderUser(newUser);
+        // // Render user in the table
+        // renderUser(newUser);
   
-        // Reset form fields
-        registrationForm.reset();
+        // // Reset form fields
+        // registrationForm.reset();
     });
   
     // Event listener for search button click
@@ -99,7 +110,34 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearUserList() {
         userList.innerHTML = '';
     }
-  });
+
+    function register(){
+        return new Promise((resolve, reject) => {
+            //Misheal and Gbolahan did
+
+            // Get form values
+            const firstName = document.getElementById('first_name').value;
+            const lastName = document.getElementById('last_name').value;
+            const phoneNumber = document.getElementById('phone_number').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+    
+            // Create a new user object
+            const newUser = {
+                id: users.length + 1,//users id should start from 1, that is why 1 was added.
+                firstName: firstName,
+                lastName: lastName,
+                phoneNumber: phoneNumber,
+                email: email,
+                password: password
+            };
+            //Ends here
+            setTimeout(()=> {
+                resolve(newUser)
+            }, 5000)
+        })
+    }
+});
 
 
 
